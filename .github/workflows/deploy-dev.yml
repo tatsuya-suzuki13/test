@@ -6,23 +6,18 @@ on:
       - main
 
 jobs:
-  deploy-dev:
+  deploy:
     runs-on: ubuntu-latest
 
     environment: development
 
     steps:
-
-      - uses: actions/checkout@v4
-
-      - name: Build
+      - name: Show Environment
         run: |
-          docker build -t app:${GITHUB_SHA} .
+          echo "Deploying to Development"
+          echo "Environment = development"
 
-      - name: Push ECR
+      - name: Show Variables
         run: |
-          docker push xxxx.dkr.ecr.ap-northeast-1.amazonaws.com/app:${GITHUB_SHA}
-
-      - name: Deploy Dev
-        run: |
-          aws deploy create-deployment ...
+          echo "Git SHA: $GITHUB_SHA"
+          echo "Branch: $GITHUB_REF_NAME"
